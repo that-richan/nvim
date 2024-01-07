@@ -54,6 +54,7 @@ require("lazy").setup({
 	{ "Shatur/neovim-session-manager" },
 	{ "coffebar/neovim-project", opts = { -- TODO Bugs out when switching projects (nvim-tree)
 		projects = {
+			vim.fn.stdpath("config"),
 			"C:/_FASTEST/*",
 			"C:/_DEV_SSD/GitHub/*"
 		},
