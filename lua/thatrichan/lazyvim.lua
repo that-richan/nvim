@@ -70,7 +70,7 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 	}},
-	{ 'akinsho/toggleterm.nvim', version = "*", config = true },
+	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{ "HiPhish/rainbow-delimiters.nvim" },
 })
