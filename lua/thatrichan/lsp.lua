@@ -7,7 +7,7 @@ vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "LSP actions",
 	callback = function(event)
-		local opts = {buffer = event.buf}
+		local opts = { buffer = event.buf }
 
 		-- these will be buffer-local keybindings
 		-- because they only work if you have an active language server

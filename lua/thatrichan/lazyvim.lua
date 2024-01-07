@@ -70,5 +70,6 @@ require("lazy").setup({
 		priority = 1000,
 	}},
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{ "HiPhish/rainbow-delimiters.nvim" },
 })
-
