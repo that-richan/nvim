@@ -16,7 +16,6 @@ require("nvim-tree").setup({
 	filters = {
 		dotfiles = true,
 	},
-	on_attach = my_on_attach,
 })
 
 require("nvim-web-devicons").setup({
