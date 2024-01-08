@@ -21,6 +21,13 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
-require("ibl").setup({ scope = { highlight = highlight } })
+require("ibl").setup({
+    indent = {
+        char = '┊',
+    },
+    scope = {
+        highlight = highlight,
+    },
+})
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

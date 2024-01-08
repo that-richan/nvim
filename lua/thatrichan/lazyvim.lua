@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	-- LSP
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = function()
 		local isWindows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
 		if isWindows then
@@ -30,27 +31,25 @@ require("lazy").setup({
 		})
 	end },
 	{ "nvim-treesitter/playground" },
-	{ "rose-pine/neovim", name = "rose-pine", config = function()
-		require("rose-pine").setup({ disable_italics = true })
-
-		vim.cmd.colorscheme("rose-pine")
-	end },
-	{ "nvim-lua/plenary.nvim" },
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" } },
+	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = { check_ts = true } }, -- TODO Inserts pair even when a matching pair already exists...
 	{ "neovim/nvim-lspconfig" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 	{ "hrsh7th/nvim-cmp" },
 	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{ "rafamadriz/friendly-snippets" },
 	{ "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp", dependencies = { "rafamadriz/friendly-snippets" } },
 	{ "olrtg/nvim-emmet" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "b0o/schemastore.nvim" },
 	{ "mhartington/formatter.nvim" },
+	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
+	-- Navigation
+	{ "nvim-lua/plenary.nvim" },
+	{ "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = { "nvim-tree/nvim-web-devicons" } },
-	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = { check_ts = true } }, -- TODO Inserts pair even when a matching pair already exists...
 	{ "Shatur/neovim-session-manager" },
 	{ "coffebar/neovim-project", opts = {
 		projects = {
@@ -72,8 +71,17 @@ require("lazy").setup({
 		priority = 1000,
 	}},
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	-- Git
+	{ "lewis6991/gitsigns.nvim" },
+	-- Looks
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "HiPhish/rainbow-delimiters.nvim" },
+	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+	{ "rose-pine/neovim", name = "rose-pine", config = function()
+		require("rose-pine").setup({ disable_italics = true })
+
+		vim.cmd.colorscheme("rose-pine")
+	end },
+	-- Other
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
-	{ "f-person/git-blame.nvim" }
 })
