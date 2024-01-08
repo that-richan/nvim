@@ -4,6 +4,7 @@ require("thatrichan.nvim-tree")
 require("thatrichan.lsp")
 require("thatrichan.formatter")
 require("thatrichan.indent-blankline")
+require("thatrichan.comment")
 if vim.g.neovide then
 	require("thatrichan.neovide")
 end

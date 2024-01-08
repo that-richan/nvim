@@ -13,9 +13,7 @@ require("nvim-tree").setup({
 	renderer = {
 		group_empty = true,
 	},
-	filters = {
-		dotfiles = true,
-	},
+	sync_root_with_cwd = true,
 })
 
 require("nvim-web-devicons").setup({

@@ -52,11 +52,12 @@ require("lazy").setup({
 	{ "nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = { "nvim-tree/nvim-web-devicons" } },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = { check_ts = true } }, -- TODO Inserts pair even when a matching pair already exists...
 	{ "Shatur/neovim-session-manager" },
-	{ "coffebar/neovim-project", opts = { -- TODO Bugs out when switching projects (nvim-tree)
+	{ "coffebar/neovim-project", opts = {
 		projects = {
 			vim.fn.stdpath("config"),
 			"C:/_FASTEST/*",
-			"C:/_DEV_SSD/GitHub/*"
+			"C:/_DEV_SSD/GitHub/*",
+			"C:/_FASTEST_GITHUB/tymbe/*",
 		},
 		init = function()
 			-- enable saving the state of plugins in the session
@@ -73,4 +74,6 @@ require("lazy").setup({
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{ "HiPhish/rainbow-delimiters.nvim" },
+	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
+	{ "f-person/git-blame.nvim" }
 })
