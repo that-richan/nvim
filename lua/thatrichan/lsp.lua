@@ -8,19 +8,30 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "LSP actions",
 	callback = function(event)
 		local opts = { buffer = event.buf }
+		local builtin = require("telescope.builtin")
 
 		-- these will be buffer-local keybindings
 		-- because they only work if you have an active language server
 
+		-- vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+		-- vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+		-- vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+		-- vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+		-- vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+		-- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+		-- vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+		-- vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+		-- vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+		-- vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-		vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+		vim.keymap.set("n", "gd", builtin.lsp_definitions, opts)
 		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-		vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+		vim.keymap.set("n", "gi", builtin.lsp_implementations, opts)
+		vim.keymap.set("n", "go", builtin.lsp_type_definitions, opts)
+		vim.keymap.set("n", "gr", builtin.lsp_references, opts)
 		vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 		vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-		vim.keymap.set({"n", "x"}, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+		vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
 		vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 	end
 })
@@ -47,7 +58,7 @@ require("mason-lspconfig").setup({
 							version = 'LuaJIT'
 						},
 						diagnostics = {
-							globals = {'vim'},
+							globals = { 'vim' },
 						},
 						workspace = {
 							library = {
@@ -64,11 +75,11 @@ require("mason-lspconfig").setup({
 				settings = {
 					yaml = {
 						schemaStore = {
-						  -- You must disable built-in schemaStore support if you want to use
-						  -- this plugin and its advanced options like `ignore`.
-						  enable = false,
-						  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-						  url = "",
+							-- You must disable built-in schemaStore support if you want to use
+							-- this plugin and its advanced options like `ignore`.
+							enable = false,
+							-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+							url = "",
 						},
 						schemas = require('schemastore').yaml.schemas(),
 						validate = { enable = true },
@@ -101,7 +112,7 @@ require("mason-lspconfig").setup({
 					"less", "sass", "scss", "pug", "typescriptreact",
 				},
 				options = {
-    				showSuggestionsAsSnippets = true,
+					showSuggestionsAsSnippets = true,
 				}
 			})
 		end
@@ -121,8 +132,22 @@ require("luasnip.loaders.from_vscode").lazy_load({
 	exclude = { "html" }, -- We don't want HTML snippets, because we use emmet
 })
 
+local lspkind = require("lspkind");
+
 local cmp = require("cmp")
+
 cmp.setup({
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = 'symbol',
+			maxwidth = 50,
+			ellipsis_char = '...',
+			show_labelDetails = true,
+			before = function(entry, vim_item)
+				return vim_item
+			end
+		})
+	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -138,18 +163,33 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 
 		-- Ctrl + space triggers completion menu
-		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-Space>"] = cmp.mapping({
+			i = function()
+				if cmp.visible() then
+					cmp.abort()
+				else
+					cmp.complete()
+				end
+			end,
+			c = function()
+				if cmp.visible() then
+					cmp.close()
+				else
+					cmp.complete()
+				end
+			end,
+		}),
 
 		-- Tab for snippets
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm({ select = true }) -- Tab confirms completion item when completion is visible
-			-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-			-- that way you will only jump inside the snippet region
+				-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+				-- that way you will only jump inside the snippet region
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
 			elseif has_words_before() then
-				cmp.complete()
+				-- cmp.complete()
 			else
 				fallback()
 			end

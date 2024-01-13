@@ -31,6 +31,7 @@ require("lazy").setup({
 		})
 	end },
 	{ "nvim-treesitter/playground" },
+	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = { check_ts = true } }, -- TODO Inserts pair even when a matching pair already exists...
 	{ "neovim/nvim-lspconfig" },
 	{ "williamboman/mason.nvim" },
@@ -45,6 +46,8 @@ require("lazy").setup({
 	{ "b0o/schemastore.nvim" },
 	{ "mhartington/formatter.nvim" },
 	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
+	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter" },
+	{ "onsails/lspkind.nvim" },
 	-- Navigation
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" } },
@@ -71,8 +74,10 @@ require("lazy").setup({
 		priority = 1000,
 	}},
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
+	{ "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" } },
 	-- Git
 	{ "lewis6991/gitsigns.nvim" },
+	{ "tpope/vim-fugitive" },
 	-- Looks
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "HiPhish/rainbow-delimiters.nvim" },
