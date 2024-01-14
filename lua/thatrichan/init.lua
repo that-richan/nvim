@@ -1,10 +1,7 @@
 require("thatrichan.remap")
 require("thatrichan.lazyvim")
-require("thatrichan.nvim-tree")
+require("thatrichan.nvim-tree") -- Keep in here, theme replaces nvim-tree theme
 require("thatrichan.lsp")
-require("thatrichan.formatter")
-require("thatrichan.indent-blankline")
-require("thatrichan.comment")
 
 if vim.g.neovide then
 	require("thatrichan.neovide")

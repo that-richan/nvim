@@ -49,6 +49,7 @@ require("lazy").setup({
 	-- Git
 	{ "lewis6991/gitsigns.nvim" },
 	{ "tpope/vim-fugitive" },
+	{ "sindrets/diffview.nvim" },
 	-- Looks
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "HiPhish/rainbow-delimiters.nvim" },
