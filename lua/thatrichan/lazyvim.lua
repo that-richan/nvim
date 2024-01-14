@@ -72,7 +72,7 @@ require("lazy").setup({
 		},
 		lazy = false,
 		priority = 1000,
-	}},
+	} },
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
 	{ "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" } },
 	-- Git
@@ -82,11 +82,8 @@ require("lazy").setup({
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
 	{ "HiPhish/rainbow-delimiters.nvim" },
 	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	{ "rose-pine/neovim", name = "rose-pine", config = function()
-		require("rose-pine").setup({ disable_italics = true })
-
-		vim.cmd.colorscheme("rose-pine")
-	end },
+	{ "tjdevries/colorbuddy.nvim" },
+	{ "2nthony/vitesse.nvim", dependencies = { "tjdevries/colorbuddy.nvim" } },
 	-- Other
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 })
