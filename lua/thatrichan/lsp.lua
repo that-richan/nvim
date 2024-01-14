@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", builtin.lsp_definitions, opts)
 		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 		vim.keymap.set("n", "gi", builtin.lsp_implementations, opts)
-		vim.keymap.set("n", "go", builtin.lsp_type_definitions, opts)
+		vim.keymap.set("n", "gt", builtin.lsp_type_definitions, opts)
 		vim.keymap.set("n", "gr", builtin.lsp_references, opts)
 		vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 		vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)

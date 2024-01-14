@@ -30,7 +30,6 @@ require("lazy").setup({
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "b0o/schemastore.nvim" },
 	{ "mhartington/formatter.nvim" },
-	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
 	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter" },
 	{ "onsails/lspkind.nvim" },
 	{ "aznhe21/actions-preview.nvim" },
@@ -41,6 +40,7 @@ require("lazy").setup({
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = { "nvim-tree/nvim-web-devicons" } },
+	{ "JMarkin/nvim-tree.lua-float-preview", lazy = true, dependencies = { "nvim-tree/nvim-tree.lua" } },
 	{ "Shatur/neovim-session-manager" },
 	{ "coffebar/neovim-project" },
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
@@ -59,6 +59,7 @@ require("lazy").setup({
 	{ "mawkler/modicator.nvim", dependencies = { "2nthony/vitesse.nvim" } },
 	{ "rcarriga/nvim-notify" },
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+	{ "kevinhwang91/nvim-hlslens" },
 	-- Other
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 	{ "equalsraf/neovim-gui-shim" },

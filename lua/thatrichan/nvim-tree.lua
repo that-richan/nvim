@@ -1,8 +1,3 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-vim.opt.termguicolors = true
-
 require("nvim-tree").setup({
 	sort = {
 		sorter = "case_sensitive",
@@ -14,6 +9,12 @@ require("nvim-tree").setup({
 		group_empty = true,
 	},
 	sync_root_with_cwd = true,
+	on_attach = function(bufnr)
+		local api = require("nvim-tree.api")
+		local FloatPreview = require("float-preview")
+		FloatPreview.attach_nvimtree(bufnr)
+		api.config.mappings.default_on_attach(bufnr)
+	end,
 })
 
 require("nvim-web-devicons").setup({
