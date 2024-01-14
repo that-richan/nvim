@@ -1,4 +1,6 @@
-require("hlslens").setup()
+require("hlslens").setup({
+	virt_priority = 0,
+})
 
 local kopts = { noremap = true, silent = true }
 

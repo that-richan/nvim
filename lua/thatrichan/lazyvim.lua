@@ -45,7 +45,7 @@ require("lazy").setup({
 	{ "coffebar/neovim-project" },
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
 	{ "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" } },
-	{ "petertriho/nvim-scrollbar" },
+	{ "petertriho/nvim-scrollbar", dependencies = { "lewis6991/gitsigns.nvim" } },
 	-- Git
 	{ "lewis6991/gitsigns.nvim" },
 	{ "tpope/vim-fugitive" },
