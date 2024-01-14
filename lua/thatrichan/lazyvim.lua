@@ -40,12 +40,12 @@ require("lazy").setup({
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = { "nvim-tree/nvim-web-devicons" } },
-	{ "JMarkin/nvim-tree.lua-float-preview", lazy = true, dependencies = { "nvim-tree/nvim-tree.lua" } },
 	{ "Shatur/neovim-session-manager" },
 	{ "coffebar/neovim-project" },
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
 	{ "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" } },
 	{ "petertriho/nvim-scrollbar", dependencies = { "lewis6991/gitsigns.nvim" } },
+	{ "mbbill/undotree" },
 	-- Git
 	{ "lewis6991/gitsigns.nvim" },
 	{ "tpope/vim-fugitive" },

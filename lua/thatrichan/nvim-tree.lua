@@ -9,12 +9,6 @@ require("nvim-tree").setup({
 		group_empty = true,
 	},
 	sync_root_with_cwd = true,
-	on_attach = function(bufnr)
-		local api = require("nvim-tree.api")
-		local FloatPreview = require("float-preview")
-		FloatPreview.attach_nvimtree(bufnr)
-		api.config.mappings.default_on_attach(bufnr)
-	end,
 })
 
 require("nvim-web-devicons").setup({
