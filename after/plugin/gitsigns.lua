@@ -6,6 +6,7 @@ require("gitsigns").setup({
 		topdelete = { text = '‾' },
 		changedelete = { text = '~' },
 	},
+	sign_priority = 1000,
 	current_line_blame = true,
 	current_line_blame_opts = {
 		virt_text = true,

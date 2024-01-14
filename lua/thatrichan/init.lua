@@ -10,6 +10,8 @@ if vim.g.neovide then
 	require("thatrichan.neovide")
 end
 
+vim.g.termguicolors=true
+
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 
@@ -21,6 +23,7 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 
 -- Enable mouse mode
+vim.o.cursorline = true
 vim.o.mouse = ''
 
 -- Sync clipboard between OS and Neovim.

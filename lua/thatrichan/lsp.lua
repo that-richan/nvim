@@ -158,10 +158,10 @@ cmp.setup({
 			cmp.config.compare.recently_used
 		},
 	},
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
 	mapping = cmp.mapping.preset.insert({
 		-- Enter key confirms completion item
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
