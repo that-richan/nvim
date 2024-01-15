@@ -6,9 +6,14 @@ vim.keymap.set("n", "<leader>th", ":Telescope neovim-project history<CR>", { nor
 neovim_project.setup({
 	projects = {
 		vim.fn.stdpath("config"),
+		-- Home (Windows)
 		"C:/_FASTEST/*",
 		"C:/_DEV_SSD/GitHub/*",
 		"C:/_FASTEST_GITHUB/tymbe/*",
+		-- Work (Linux)
+		"~/DEV/BitBucket/*",
+		"~/DEV/GitHub/*",
+		"~/DEV/Personal/*",
 	},
 	init = function()
 		-- enable saving the state of plugins in the session
