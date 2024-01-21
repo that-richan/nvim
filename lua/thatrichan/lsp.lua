@@ -135,7 +135,6 @@ require("luasnip.loaders.from_vscode").lazy_load({
 local lspkind = require("lspkind");
 
 local cmp = require("cmp")
-
 cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({

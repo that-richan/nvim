@@ -12,6 +12,8 @@ vim.keymap.set("n", "<leader>gs", builtin.git_stash, {})
 vim.keymap.set("n", "<leader>gf", builtin.git_status, {})
 vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})
 
+vim.keymap.set("n", "<leader>rr", builtin.resume, {})
+
 telescope.setup({
 	pickers = {
 		find_files = {
