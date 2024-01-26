@@ -109,7 +109,8 @@ require("mason-lspconfig").setup({
 				capabilities = lsp_capabilities,
 				filetypes = {
 					"css", "eruby", "html", "javascript", "javascriptreact",
-					"less", "sass", "scss", "pug", "typescriptreact",
+					"less", "sass", "scss", "pug", "typescriptreact", "svelte",
+					"angular", "vue", "twig"
 				},
 				options = {
 					showSuggestionsAsSnippets = true,
