@@ -39,7 +39,7 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "nvim-tree/nvim-web-devicons" },
-	{ "nvim-tree/nvim-tree.lua", version = "*", lazy = false, dependencies = { "nvim-tree/nvim-web-devicons" } },
+	{ "nvim-tree/nvim-tree.lua", version = "*", dependencies = { "nvim-tree/nvim-web-devicons" } },
 	{ "Shatur/neovim-session-manager" },
 	{ "coffebar/neovim-project" },
 	{ 'akinsho/toggleterm.nvim', version = "*", config = true }, -- TODO Keymaps and how to use
@@ -62,6 +62,6 @@ require("lazy").setup({
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "kevinhwang91/nvim-hlslens" },
 	-- Other
-	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
+	{ "numToStr/Comment.nvim", opts = {} },
 	{ "equalsraf/neovim-gui-shim" },
 })
