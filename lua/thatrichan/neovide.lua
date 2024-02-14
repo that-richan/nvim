@@ -1,4 +1,4 @@
-vim.o.guifont = "MonaspiceNe Nerd Font Mono:h12"
+vim.o.guifont = "MonaspiceNe Nerd Font Mono:h11"
 vim.opt.linespace = 2
 
 local padding = 5
