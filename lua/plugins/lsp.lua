@@ -129,6 +129,9 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 	},
 	{
+		"onsails/lspkind.nvim"
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
@@ -137,24 +140,35 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind.nvim",
 		},
 		opts = function()
 			local cmp = require("cmp")
-			-- TODO Fix, luasnip is somehow NIL (:
 			local luasnip = require("luasnip")
+			local lspkind = require("lspkind")
 			require("luasnip.loaders.from_vscode").lazy_load({
 				exclude = { "html" },
 			})
-			local defaults = require("cmp.config.default")()
 			return {
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol",
+						maxwidth = 50,
+						ellipsis_char = "...",
+						show_labelDetails = true,
+						before = function(entry, vim_item)
+							return vim_item
+						end
+					})
+				},
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_extend(args.body)
+						luasnip.lsp_expand(args.body)
 					end
 				},
 				--window = {
-					--completion = cmp.config.window.bordered(),
-					--documentation = cmp.config.window.bordered(),
+				--	completion = cmp.config.window.bordered(),
+				--	documentation = cmp.config.window.bordered(),
 				--},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
@@ -164,7 +178,14 @@ return {
 				}, {
 					{ name = "buffer" },
 				}),
-				sorting = defaults.sorting,
+				sorting = {
+					comparators = {
+						cmp.config.compare.recently_used,
+					}
+				},
+				completion = {
+					completeopt = "menu,menuone,noinsert"
+				},
 				mapping = cmp.mapping.preset.insert({
 					-- Enter key confirms completion item
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -218,5 +239,23 @@ return {
 	},
 	{
 		"b0o/schemastore.nvim",
-	}
+	},
+	{
+		"RRethy/vim-illuminate",
+		config = function()
+			require("illuminate").configure({
+				delay = 0,
+				filetypes_denylist = {
+					"NvimTree",
+					"TelescopePrompt",
+				}
+			})
+		end
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		opts = function()
+			return {}
+		end
+	},
 }

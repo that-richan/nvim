@@ -7,6 +7,7 @@ opt.clipboard = "unnamedplus"
 opt.confirm = true
 opt.cursorline = true
 opt.ignorecase = true
+opt.smartcase = true
 opt.number = true
 opt.relativenumber = true
 opt.mouse = "a"
@@ -20,4 +21,7 @@ opt.wrap = false
 opt.termguicolors = true
 opt.winminwidth = 5
 opt.list = true
-opt.completeopt = "menuone,noselect"
+opt.completeopt = "menu,menuone,noinsert"
+opt.laststatus = 0
+
+vim.wo.signcolumn = "yes"
