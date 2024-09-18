@@ -23,5 +23,6 @@ opt.winminwidth = 5
 opt.list = true
 opt.completeopt = "menu,menuone,noinsert"
 opt.laststatus = 0
+opt.pumblend = 100
 
 vim.wo.signcolumn = "yes"

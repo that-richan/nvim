@@ -115,7 +115,7 @@ return {
 		"hrsh7th/cmp-path"
 	},
 	{
-		"hrsh7th/cmp-nvim-lsp-signature-help"
+		"hrsh7th/cmp-nvim-lsp-signature-help" -- TODO Stopped working...
 	},
 	{
 		"rafamadriz/friendly-snippets"
@@ -141,25 +141,30 @@ return {
 			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind.nvim",
+			"js-everts/cmp-tailwind-colors",
 		},
 		opts = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
+			local twc = require("cmp-tailwind-colors")
 			require("luasnip.loaders.from_vscode").lazy_load({
 				exclude = { "html" },
 			})
 			return {
 				formatting = {
-					format = lspkind.cmp_format({
-						mode = "symbol",
-						maxwidth = 50,
-						ellipsis_char = "...",
-						show_labelDetails = true,
-						before = function(entry, vim_item)
-							return vim_item
-						end
-					})
+					fields = { "kind", "abbr", "menu" },
+					format = function(entry, item)
+						item = twc.format(entry, item)
+						local kind = lspkind.cmp_format({
+							mode = "symbol",
+							maxwidth = 50,
+							ellipsis_char = "...",
+							show_labelDetails = true,
+						})(entry, item).kind
+						item.kind = kind .. " "
+						return item
+					end
 				},
 				snippet = {
 					expand = function(args)
@@ -190,8 +195,8 @@ return {
 					-- Enter key confirms completion item
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-					-- Ctrl + space triggers completion menu
-					["<C-Space>"] = cmp.mapping({
+					-- Ctrl + E triggers completion menu
+					["<C-E>"] = cmp.mapping({
 						i = function()
 							if cmp.visible() then
 								cmp.abort()
