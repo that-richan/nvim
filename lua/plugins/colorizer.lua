@@ -23,15 +23,8 @@ return {
 	},
 	{
 		"themaxmarchuk/tailwindcss-colors.nvim",
-		config = function()
-			local twcolors = require("tailwindcss-colors")
-			twcolors.setup()
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(event)
-					twcolors.buf_attach(event.buffer)
-				end
-			})
-		end
+		module = "tailwindcss-colors",
+		opts = {},
 	},
 	{
 		"folke/todo-comments.nvim",

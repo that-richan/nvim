@@ -21,6 +21,7 @@ return {
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
 			"b0o/schemastore.nvim",
+			"themaxmarchuk/tailwindcss-colors.nvim"
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -33,16 +34,24 @@ return {
 				ensure_installed = {},
 				handlers = {
 					default_setup,
+					tailwindcss = function()
+						require("lspconfig").tailwindcss.setup({
+							capabilities = capabilities,
+							on_attach = function(_client, buffer)
+								require("tailwindcss-colors").buf_attach(buffer)
+							end,
+						})
+					end,
 					lua_ls = function()
-						require('lspconfig').lua_ls.setup({
+						require("lspconfig").lua_ls.setup({
 							capabilities = capabilities,
 							settings = {
 								Lua = {
 									runtime = {
-										version = 'LuaJIT'
+										version = "LuaJIT"
 									},
 									diagnostics = {
-										globals = { 'vim' },
+										globals = { "vim" },
 									},
 									workspace = {
 										library = {
@@ -54,7 +63,7 @@ return {
 						})
 					end,
 					yamlls = function()
-						require('lspconfig').yamlls.setup({
+						require("lspconfig").yamlls.setup({
 							capabilities = capabilities,
 							settings = {
 								yaml = {
@@ -62,10 +71,10 @@ return {
 										-- You must disable built-in schemaStore support if you want to use
 										-- this plugin and its advanced options like `ignore`.
 										enable = false,
-										-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+										-- Avoid TypeError: Cannot read properties of undefined (reading "length")
 										url = "",
 									},
-									schemas = require('schemastore').yaml.schemas(),
+									schemas = require("schemastore").yaml.schemas(),
 									validate = { enable = true },
 									customTags = {
 										"!Cidr", "!Cidr sequence",
@@ -89,7 +98,7 @@ return {
 						})
 					end,
 					emmet_language_server = function()
-						require('lspconfig').emmet_language_server.setup({
+						require("lspconfig").emmet_language_server.setup({
 							capabilities = capabilities,
 							filetypes = {
 								"css", "eruby", "html", "javascript", "javascriptreact",
@@ -259,8 +268,6 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
-		opts = function()
-			return {}
-		end
+		opts = {},
 	},
 }

@@ -11,10 +11,12 @@ return {
                     vim.fn.stdpath("config"),
                     -- Home
                     "~/PERSONAL/GitHub/*",
+					"~/PERSONAL/BitBucket/*",
+					"~/PERSONAL/GitLab/*",
                     -- Work 
                     "~/FASTEST/BitBucket/*",
                     "~/FASTEST/GitHub/*",
-                    "~/FASTEST/Personal/*",
+					"~/FASTEST/GitLab/*",
                 },
                 init = function()
                     -- enable saving the state of plugins in the session
