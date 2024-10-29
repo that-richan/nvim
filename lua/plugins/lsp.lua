@@ -194,7 +194,15 @@ return {
 				}),
 				sorting = {
 					comparators = {
+						cmp.config.compare.offset,
+						cmp.config.compare.exact,
+						cmp.config.compare.score,
 						cmp.config.compare.recently_used,
+						cmp.config.compare.kind,
+						cmp.config.compare.sort_text,
+						cmp.config.compare.locality,
+						cmp.config.compare.length,
+						cmp.config.compare.order,
 					}
 				},
 				completion = {
@@ -204,8 +212,8 @@ return {
 					-- Enter key confirms completion item
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-					-- Ctrl + E triggers completion menu
-					["<C-E>"] = cmp.mapping({
+					-- Ctrl + Space triggers completion menu
+					["<C-Space>"] = cmp.mapping({
 						i = function()
 							if cmp.visible() then
 								cmp.abort()
