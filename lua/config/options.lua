@@ -1,5 +1,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.g.markdown_fences_languages = {
+	"ts=typescript"
+}
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 local opt = vim.opt
 
@@ -24,5 +29,7 @@ opt.list = true
 opt.completeopt = "menu,menuone,noinsert"
 opt.laststatus = 0
 opt.pumblend = 100
+opt.shell = "bash"
+opt.shellcmdflag = "-c"
 
 vim.wo.signcolumn = "yes"

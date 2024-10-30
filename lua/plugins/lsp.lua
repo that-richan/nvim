@@ -21,12 +21,26 @@ return {
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
 			"b0o/schemastore.nvim",
-			"themaxmarchuk/tailwindcss-colors.nvim"
+			"themaxmarchuk/tailwindcss-colors.nvim",
+			"antosha417/nvim-lsp-file-operations",
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local lspconfig = require("lspconfig");
+			lspconfig.util.default_config = vim.tbl_extend(
+				"force",
+				lspconfig.util.default_config,
+				{
+					capabilities = vim.tbl_deep_extend(
+						"force",
+						vim.lsp.protocol.make_client_capabilities(),
+						require("lsp-file-operations").default_capabilities()
+					)
+				}
+			)
+			local tailwindcssColors = require("tailwindcss-colors");
 			local default_setup = function(server)
-				require("lspconfig")[server].setup({
+				lspconfig[server].setup({
 					capabilities = capabilities,
 				})
 			end
@@ -35,15 +49,28 @@ return {
 				handlers = {
 					default_setup,
 					tailwindcss = function()
-						require("lspconfig").tailwindcss.setup({
+						lspconfig.tailwindcss.setup({
 							capabilities = capabilities,
 							on_attach = function(_client, buffer)
-								require("tailwindcss-colors").buf_attach(buffer)
+								tailwindcssColors.buf_attach(buffer)
 							end,
 						})
 					end,
+					denols = function()
+						lspconfig.denols.setup({
+							capabilities = capabilities,
+							root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+						})
+					end,
+					ts_ls = function()
+						lspconfig.ts_ls.setup({
+							capabilities = capabilities,
+							root_dir = lspconfig.util.root_pattern("package.json"),
+							single_file_support = false
+						})
+					end,
 					lua_ls = function()
-						require("lspconfig").lua_ls.setup({
+						lspconfig.lua_ls.setup({
 							capabilities = capabilities,
 							settings = {
 								Lua = {
@@ -63,7 +90,7 @@ return {
 						})
 					end,
 					yamlls = function()
-						require("lspconfig").yamlls.setup({
+						lspconfig.yamlls.setup({
 							capabilities = capabilities,
 							settings = {
 								yaml = {
@@ -98,11 +125,12 @@ return {
 						})
 					end,
 					emmet_language_server = function()
-						require("lspconfig").emmet_language_server.setup({
+						lspconfig.emmet_language_server.setup({
 							capabilities = capabilities,
 							filetypes = {
 								"css", "eruby", "html", "javascript", "javascriptreact",
-								"less", "sass", "scss", "pug", "typescriptreact", "svelte",
+								"less", "sass", "scss", "pug", "typescriptreact",
+								"svelte",
 								"angular", "vue", "twig"
 							},
 							options = {
@@ -124,9 +152,6 @@ return {
 		"hrsh7th/cmp-path"
 	},
 	{
-		"hrsh7th/cmp-nvim-lsp-signature-help" -- TODO Stopped working...
-	},
-	{
 		"rafamadriz/friendly-snippets"
 	},
 	{
@@ -141,11 +166,23 @@ return {
 		"onsails/lspkind.nvim"
 	},
 	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		opts = {
+			bind = true,
+			handler_opts = {
+				border = "none",
+			},
+			padding = " ",
+			hint_enable = false,
+			transparency = 25,
+		},
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
@@ -186,7 +223,6 @@ return {
 				--},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "nvim_lsp_signature_help" },
 					{ name = "luasnip" },
 					{ name = "path" },
 				}, {
@@ -212,8 +248,8 @@ return {
 					-- Enter key confirms completion item
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-					-- Ctrl + Space triggers completion menu
-					["<C-Space>"] = cmp.mapping({
+					-- Ctrl + E triggers completion menu
+					["<C-E>"] = cmp.mapping({
 						i = function()
 							if cmp.visible() then
 								cmp.abort()
