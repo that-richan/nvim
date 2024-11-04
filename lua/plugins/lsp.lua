@@ -175,7 +175,6 @@ return {
 			},
 			padding = " ",
 			hint_enable = false,
-			transparency = 25,
 		},
 	},
 	{
