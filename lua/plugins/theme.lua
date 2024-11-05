@@ -8,6 +8,7 @@ return {
 				flavour = "mocha",
 				no_italic = true,
 				no_bold = true,
+				transparent_background = true,
 			})
 
 			vim.cmd("colorscheme catppuccin")
